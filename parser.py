@@ -13,26 +13,6 @@ def find_rule(word):
                 line = line.replace("\n", "")
                 grammar[line.split(" -> ")[0]].append(line.split(" -> ")[1])
 
-    #initialize words
-    # file = "words.txt"
-    # with open(file, 'r') as a_file:
-    #     for line in a_file:
-    #         line = line.replace("\n", "")
-    #         if "NP" in line.split(" -> "):
-    #             kata = line.split(" -> ")[1]
-    #             for words in kata:
-    #                 grammar["NP"].append(words)
-    #
-    #         if len(line) > 3 and line.split(" -> ")[0] not in grammar.keys():
-    #             grammar[line.split(" -> ")[0]] = []
-    #             tmp = line.split(" -> ")[1].split(" ")
-    #             for words in tmp:
-    #                 grammar[line.split(" -> ")[0]].append(words)
-
-
-
-
-
 
     # find which rule this belongs to
     exp = []
@@ -43,42 +23,7 @@ def find_rule(word):
                 exp.append(key)
                 break
 
-    # #to check twice
-    # l = word.split(" ")
-    # new_word = ''
-    # if exp == []:
-    #     for i in l:
-    #         for key in grammar:
-    #             rules = grammar.get(key)
-    #             for rule in rules:
-    #                 if i == rule:
-    #                     new_word += i + ' '
-    #
-    #     for key in grammar:
-    #         rules = grammar.get(key)
-    #         for rule in rules:
-    #             if word in rule:
-    #                 exp.append(key)
-    #                 break
-    #
-    # l = new_word.split(" ")
-    # word = ''
-    # if exp == []:
-    #     for i in l:
-    #         for key in grammar:
-    #             rules = grammar.get(key)
-    #             for rule in rules:
-    #                 if i == rule:
-    #                     word += i + ' '
-    #
-    #     for key in grammar:
-    #         rules = grammar.get(key)
-    #         for rule in rules:
-    #             if new_word in rule:
-    #                 exp.append(key)
-    #                 break
-
-
+   
     return exp
 
 
