@@ -1,3 +1,5 @@
+import string
+
 # note, when passing parameter to this func. find_rule("word") without end space. Not find_rule("word ")
 def find_rule(word):
     # initialize rules
@@ -13,6 +15,22 @@ def find_rule(word):
                 line = line.replace("\n", "")
                 grammar[line.split(" -> ")[0]].append(line.split(" -> ")[1])
 
+    #initialize words
+    # file = "words.txt"
+    # with open(file, 'r') as a_file:
+    #     for line in a_file:
+    #         line = line.replace("\n", "")
+    #         if "NP" in line.split(" -> "):
+    #             kata = line.split(" -> ")[1]
+    #             for words in kata:
+    #                 grammar["NP"].append(words)
+    #
+    #         if len(line) > 3 and line.split(" -> ")[0] not in grammar.keys():
+    #             grammar[line.split(" -> ")[0]] = []
+    #             tmp = line.split(" -> ")[1].split(" ")
+    #             for words in tmp:
+    #                 grammar[line.split(" -> ")[0]].append(words)
+
 
     # find which rule this belongs to
     exp = []
@@ -23,7 +41,77 @@ def find_rule(word):
                 exp.append(key)
                 break
 
-   
+    if len(exp) == 0:
+        word = word.split(" ")
+        s = ''
+        for i in word:
+            if i == 'NP':
+                s += 'S '
+            elif i == 'VP':
+                s += 'P '
+            else:
+                s += i
+
+        for key in grammar:
+            rules = grammar.get(key)
+            for rule in rules:
+                if s in rule:
+                    exp.append(key)
+                    break
+
+        # index = 0
+        # for i in word:
+        #     word[index] = find_rule(i)
+        #     index += 1
+        #
+        # tmp = str(word[0]) + str(word[1])
+        #
+        # for key in grammar:
+        #     rules = grammar.get(key)
+        #     for rule in rules:
+        #         if tmp in rule:
+        #             exp.append(key)
+        #             break
+
+
+    # #to check twice
+    # l = word.split(" ")
+    # new_word = ''
+    # if exp == []:
+    #     for i in l:
+    #         for key in grammar:
+    #             rules = grammar.get(key)
+    #             for rule in rules:
+    #                 if i == rule:
+    #                     new_word += i + ' '
+    #
+    #     for key in grammar:
+    #         rules = grammar.get(key)
+    #         for rule in rules:
+    #             if word in rule:
+    #                 exp.append(key)
+    #                 break
+    #
+    # l = new_word.split(" ")
+    # word = ''
+    # if exp == []:
+    #     for i in l:
+    #         for key in grammar:
+    #             rules = grammar.get(key)
+    #             for rule in rules:
+    #                 if i == rule:
+    #                     word += i + ' '
+    #
+    #     for key in grammar:
+    #         rules = grammar.get(key)
+    #         for rule in rules:
+    #             if new_word in rule:
+    #                 exp.append(key)
+    #                 break
+
+    #['NP', 'NP VP', 'VP NP', 'VP']
+    #['S P', 'P']
+
     return exp
 
 
@@ -88,8 +176,12 @@ def cyk(string):
                 exp[item] = 'x'
 
             #print(exp[-1][0])
+            print("findrule: ", exp[-1][0])
             table[j][i] = find_rule(exp[-1][0])
-            #print(table)
+            save = ''
+            if j == m-1 and i == 0:
+                save = exp[-1][0]
+            print(table)
 
     #now table is completed
     structure = table[m-1][0]
@@ -98,11 +190,12 @@ def cyk(string):
     for i in structure:
         final += find_rule(i)[0]
 
-    if find_rule(final) == []:
+    if len(find_rule(final)) == 0:
         print(f"kalimat tidak baku")
     else:
-        print(f"kalimat ada dalam bahasa indonesia. Struktur: {final}")
+        print(f"kalimat ada dalam bahasa indonesia. Struktur: {save}")
     return final
 
-kalimat = input("Masukkan kalimat yang ingin diparsing: ")
+#kalimat = input("Masukkan kalimat yang ingin diparsing: ")
+kalimat = 'Beni sedang bermain'
 cyk(kalimat)
