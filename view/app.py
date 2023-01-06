@@ -7,7 +7,7 @@ from script.cyk import cyk
 # def for program ui
 def view_streamlit():
     # prepare the cnf rules
-    cnf = open_file(r'C:\Users\ASUS\OneDrive\Dokumen\Tugas smt 3\TBO\FP_TBO_FIX\cnf.txt')
+    cnf = open_file(r'cnf.txt')
     # set web background color
     web_bg = """
     <style>
