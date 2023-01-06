@@ -1,3 +1,5 @@
+# first, put CNF into dictionary
+import streamlit as st
 def init_grammar(filename):
     grammar = {}
     with open(filename, 'r') as file:
@@ -45,7 +47,7 @@ def concat(s1, s2):
     return tmp
 
 
-def cyk_alg(s):
+def cyk(s):
     s = s.split(" ") # pecah string menjadi list berdasarkan kata
     n = len(s) # jumlah kata
     table = [[[] for i in range(n)] for j in range(n)] # buat tabel
@@ -66,16 +68,32 @@ def cyk_alg(s):
                 for x in range(1, loop):
                     table[i][j] += find_rule(concat(table[i-k[-x]][j], table[i][j+k[x-1]]))
                     # cetak tabel masing-masing sel
-        #print(table)
-        # cetak tabel per row
 
+        # cetak tabel per row
+        # check output in terminal
+        print(table)
+        # show CYK in web
+        st.dataframe(table)
+
+    st.write("Hasil Parsing CYK Table Filling: ")
     # cetak tabel setelah selesai
+    print('\n\n')
+    table2 = []
     for row in table:
-        print(row)
+        table2.append(row)
+    #check output in terminal
+    print(table2)
+    #show CYK in web
+    st.dataframe(table2)
+
+    print('\n\n')
+    if table[n-1][0] == []:
+        st.error("Kalimat tidak valid!")
+    else:
+        st.success("Kalimat valid")
 
     return table
 
-file = 'cnf.txt'
-string = 'Kratos datang dari Yunani'
-grammar = init_grammar(file)
-cyk_alg(string)
+
+
+grammar = init_grammar(r'cnf.txt')
