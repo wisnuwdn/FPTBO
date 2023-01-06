@@ -75,7 +75,7 @@ def cyk_alg(s):
 
     return table
 
-file = 'out.txt'
+file = 'cnf.txt'
 string = 'Kratos datang dari Yunani'
 grammar = init_grammar(file)
 cyk_alg(string)
