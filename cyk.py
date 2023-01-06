@@ -31,8 +31,6 @@ def find_rule(exp):
             if item in grammar.get(key):
                 tmp.append(key)
 
-    #print('exp: ', exp,'tmp: ', tmp)
-
     return tmp
 
 
@@ -55,7 +53,6 @@ def cyk(s):
 
     # loop untuk row 1
     for i in range(n):
-        #table[i][n-i-1] = find_rule([s[i]])
         table[i][i] = find_rule([s[i]])
 
     # rumus cyk: V(i,j) = V(i-k[-(x)],j) * V(i, j+k[x-1])
@@ -69,7 +66,11 @@ def cyk(s):
             for j in range(n - loop+1): # 0, 1, 2, 3
                 for x in range(1, loop):
                     table[i][j] += find_rule(concat(table[i-k[-x]][j], table[i][j+k[x-1]]))
-
+                    # cetak tabel masing-masing sel
+        #print(table)
+        # cetak tabel per row
+        
+    # cetak tabel setelah selesai
     for row in table:
         print(row)
 
@@ -77,4 +78,4 @@ def cyk(s):
 
 
 grammar = init_grammar('cnf.txt')
-cyk('Kratos datang dari Yunani')
+cyk('Kratos datang dari')
