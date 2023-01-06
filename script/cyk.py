@@ -96,4 +96,4 @@ def cyk(s):
 
 
 
-grammar = init_grammar(r'C:\Users\ASUS\OneDrive\Dokumen\Tugas smt 3\TBO\FP_TBO_FIX\cnf.txt')
+grammar = init_grammar(r'cnf.txt')
