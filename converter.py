@@ -124,7 +124,7 @@ remove_long_k()
 
 remove_unit_prod()
 
-cfg_file = 'out.txt'
+cfg_file = 'cnf.txt'
 with open(cfg_file, 'w') as newfile:
     for k in grammar:
         newfile.write(f"{k} -> ")
