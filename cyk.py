@@ -1,6 +1,24 @@
-import init
+# first, put CNF into dictionary
+import streamlit as st
+def init_grammar(filename):
+    grammar = {}
+    with open(filename, 'r') as file:
+        for line in file:
+            # line lebih besar dari 0 berarti bukan spasi kosong pada txtfile
+            if len(line) > 0:
+                line = line.replace("\n", "")
+                lhs = line.split(" -> ")[0]
+                rhs = line.split(" -> ")[1]
 
-grammar = init.init_grammar('cnf.txt')
+                # create empty list for each key
+                if line.split(" -> ")[0] not in grammar.keys():
+                    grammar[lhs] = []
+
+                # cari rhs dan pisahkan "|"
+                rhs = rhs.split("|")
+                grammar[lhs] = rhs
+
+    return grammar
 
 
 def find_rule(exp):
@@ -29,7 +47,7 @@ def concat(s1, s2):
     return tmp
 
 
-def cyk_alg(s):
+def cyk(s):
     s = s.split(" ") # pecah string menjadi list berdasarkan kata
     n = len(s) # jumlah kata
     table = [[[] for i in range(n)] for j in range(n)] # buat tabel
@@ -50,16 +68,32 @@ def cyk_alg(s):
                 for x in range(1, loop):
                     table[i][j] += find_rule(concat(table[i-k[-x]][j], table[i][j+k[x-1]]))
                     # cetak tabel masing-masing sel
-        #print(table)
+
         # cetak tabel per row
+        # check output in terminal
+        print(table)
+        # show CYK in web
+        st.dataframe(table)
 
+    st.write("Hasil Parsing CYK Table Filling: ")
     # cetak tabel setelah selesai
+    print('\n\n')
+    table2 = []
     for row in table:
-        print(row)
+        table2.append(row)
+    #check output in terminal
+    print(table2)
+    #show CYK in web
+    st.dataframe(table2)
 
+    print('\n\n')
     if table[n-1][0] == []:
-        print("\nstring not valid")
+        st.error("Kalimat tidak valid!")
     else:
-        print("\nstring is valid")
+        st.success("Kalimat valid")
 
     return table
+
+
+
+grammar = init_grammar(r'C:\Users\ASUS\OneDrive\Dokumen\Tugas smt 3\TBO\FP_TBO_FIX\cnf.txt')
