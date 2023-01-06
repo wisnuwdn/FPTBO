@@ -1,22 +1,6 @@
-def init_grammar(filename):
-    grammar = {}
-    with open(filename, 'r') as file:
-        for line in file:
-            # line lebih besar dari 0 berarti bukan spasi kosong pada txtfile
-            if len(line) > 0:
-                line = line.replace("\n", "")
-                lhs = line.split(" -> ")[0]
-                rhs = line.split(" -> ")[1]
+import init
 
-                # create empty list for each key
-                if line.split(" -> ")[0] not in grammar.keys():
-                    grammar[lhs] = []
-
-                # cari rhs dan pisahkan "|"
-                rhs = rhs.split("|")
-                grammar[lhs] = rhs
-
-    return grammar
+grammar = init.init_grammar('cnf.txt')
 
 
 def find_rule(exp):
@@ -74,8 +58,3 @@ def cyk_alg(s):
         print(row)
 
     return table
-
-file = 'cnf.txt'
-string = 'Kratos datang dari Yunani'
-grammar = init_grammar(file)
-cyk_alg(string)
