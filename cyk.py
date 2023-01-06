@@ -1,4 +1,3 @@
-# first, put CNF into dictionary
 def init_grammar(filename):
     grammar = {}
     with open(filename, 'r') as file:
@@ -46,7 +45,7 @@ def concat(s1, s2):
     return tmp
 
 
-def cyk(s):
+def cyk_alg(s):
     s = s.split(" ") # pecah string menjadi list berdasarkan kata
     n = len(s) # jumlah kata
     table = [[[] for i in range(n)] for j in range(n)] # buat tabel
@@ -69,13 +68,14 @@ def cyk(s):
                     # cetak tabel masing-masing sel
         #print(table)
         # cetak tabel per row
-        
+
     # cetak tabel setelah selesai
     for row in table:
         print(row)
 
     return table
 
-
-grammar = init_grammar('cnf.txt')
-cyk('Kratos datang dari')
+file = 'out.txt'
+string = 'Kratos datang dari Yunani'
+grammar = init_grammar(file)
+cyk_alg(string)
