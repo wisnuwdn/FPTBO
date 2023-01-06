@@ -57,4 +57,9 @@ def cyk_alg(s):
     for row in table:
         print(row)
 
+    if table[n-1][0] == []:
+        print("\nstring not valid")
+    else:
+        print("\nstring is valid")
+
     return table
