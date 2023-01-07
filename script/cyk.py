@@ -1,8 +1,8 @@
 # first, put CNF into dictionary
 import streamlit as st
-import init
+from script import init
 
-grammar = init.init_grammar('cnf.txt')
+grammar = init.init_grammar(r'cnf.txt')
 
 
 def find_rule(exp):
@@ -77,7 +77,3 @@ def cyk(s):
         st.success("Kalimat valid")
 
     return table
-
-
-
-grammar = init_grammar(r'cnf.txt')
