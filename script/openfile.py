@@ -1,14 +1,14 @@
-def open_file(filepath):
+def open_file(filename):
     # prepare the empty list
-    data = []
+    inf = []
     # open txt with read mode
-    with open(filepath, 'r') as file:
+    with open(filename, 'r') as file:
         # read rule line by line
-        raw = file.readlines()
+        data = file.readlines()
 
         # append each rule into data list while remove the new line
-        for rule in raw:
-            data.append(rule.strip('\n'))
+        for rule in data:
+            inf.append(rule.strip('\n'))
 
     # return the raw cnf rules
-    return data
+    return inf
