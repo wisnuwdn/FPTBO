@@ -10,5 +10,5 @@ def open_file(filename):
         for rule in data:
             inf.append(rule.strip('\n'))
 
-    # return the raw cnf rules
+    # return the cnf rules
     return inf
